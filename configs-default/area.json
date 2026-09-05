@@ -1,0 +1,16 @@
+{
+  "scan_interval_ticks": 20,
+  "areas": [
+    {
+      "name": "spawn_hub",
+      "dimension": "minecraft:overworld",
+      "start": [-64, -64],
+      "end": [64, 64],
+      "features": {
+        "peace": {},
+        "fly": {},
+        "gamemode": { "mode": "survival", "enforce": true }
+      }
+    }
+  ]
+}

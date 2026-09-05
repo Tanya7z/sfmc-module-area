@@ -1,0 +1,77 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/DogeLakeDev/ScriptsForMinecraftServer@latest/modules/sdk/%40sfmc-sdk/schemas/sapi-manifest.v2.schema.json",
+  "schemaVersion": 2,
+  "id": "area",
+  "name": "空间微内核",
+  "configKey": "area",
+  "requires": [],
+  "permissions": [
+    "config:read:area",
+    "service:area.registerFeature",
+    "service:area.registerArea",
+    "service:area.unregisterArea",
+    "service:area.byName",
+    "service:area.byPoint",
+    "service:area.listAreas"
+  ],
+  "services": {
+    "provides": [
+      {
+        "name": "area.registerFeature",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "area.registerArea",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "area.unregisterArea",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "area.byName",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "area.byPoint",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "area.listAreas",
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      }
+    ],
+    "requires": []
+  },
+  "notes": "纯内存空间微内核：AABB + registerFeature/registerArea；零玩法硬编码。"
+}
