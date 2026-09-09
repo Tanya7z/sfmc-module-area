@@ -3,8 +3,8 @@
  */
 
 import { Player, system, world } from "@minecraft/server";
-import { config } from "@sfmc-bds/sdk/sapi/config";
 import { ModuleRegistry } from "@sfmc-bds/sdk/module-loader";
+import { config } from "@sfmc-bds/sdk/sapi/config";
 import { debug } from "@sfmc-bds/sdk/sapi/runtime";
 import { service } from "@sfmc-bds/sdk/sapi/service";
 import {
@@ -44,9 +44,7 @@ function normalizeAreas(raw: unknown): AreaDefinition[] {
     const end = Array.isArray(o.end) ? (o.end as [number, number]) : null;
     if (!name || !dimension || !start || !end) continue;
     const features =
-      o.features && typeof o.features === "object"
-        ? (o.features as Record<string, Record<string, unknown>>)
-        : {};
+      o.features && typeof o.features === "object" ? (o.features as Record<string, Record<string, unknown>>) : {};
     // 兼容旧布尔开关：true → {}
     const normalizedFeatures: Record<string, Record<string, unknown>> = {};
     for (const [k, v] of Object.entries(features as Record<string, unknown>)) {
@@ -71,9 +69,6 @@ ModuleRegistry.register({
   lifecycle: {
     registerPermissions() {
       // 无玩家命令
-    },
-    registerCommands() {
-      // 无
     },
     registerEvents() {
       const leaveCb = world.afterEvents.playerLeave.subscribe((ev) => {
@@ -129,21 +124,15 @@ ModuleRegistry.register({
             id: raw.id || id,
           };
           return registerFeature(handler);
-        }),
+        })
       );
       unprovide.push(
         service.provide("area.registerArea", (input) =>
-          registerArea({ ...(input as unknown as AreaDefinition), dynamic: true }),
-        ),
+          registerArea({ ...(input as unknown as AreaDefinition), dynamic: true })
+        )
       );
-      unprovide.push(
-        service.provide("area.unregisterArea", (input) =>
-          unregisterArea(String(input.name ?? "")),
-        ),
-      );
-      unprovide.push(
-        service.provide("area.byName", (input) => getAreaByName(String(input.name ?? ""))),
-      );
+      unprovide.push(service.provide("area.unregisterArea", (input) => unregisterArea(String(input.name ?? ""))));
+      unprovide.push(service.provide("area.byName", (input) => getAreaByName(String(input.name ?? ""))));
       unprovide.push(
         service.provide("area.byPoint", (input) =>
           byPoint({
@@ -151,13 +140,13 @@ ModuleRegistry.register({
             x: Number(input.x),
             z: Number(input.z),
             feature: typeof input.feature === "string" ? input.feature : undefined,
-          }),
-        ),
+          })
+        )
       );
       unprovide.push(
         service.provide("area.listAreas", (input) =>
-          listAreas(typeof input.dimension === "string" ? input.dimension : undefined),
-        ),
+          listAreas(typeof input.dimension === "string" ? input.dimension : undefined)
+        )
       );
 
       debug.i("Area", `init areas=${listAreas().length} interval=${scanIntervalTicks}`);
